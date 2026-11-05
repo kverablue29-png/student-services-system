@@ -1,0 +1,110 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================
+   GLOBAL SCARLET RED THEME
+   Student Services Request System
+===================================== */
+
+:root {
+    --primary: #D62828;
+    --primary-dark: #B91C1C;
+    --primary-light: #FEE2E2;
+    --page-background: #FFF5F5;
+    --text-color: #292524;
+}
+
+/* Main page background */
+body {
+    background-color: var(--page-background);
+    color: var(--text-color);
+}
+
+/* Blue and Indigo backgrounds to Scarlet Red */
+.bg-blue-500,
+.bg-blue-600,
+.bg-blue-700,
+.bg-indigo-500,
+.bg-indigo-600,
+.bg-indigo-700 {
+    background-color: var(--primary) !important;
+}
+
+/* Hover colors */
+.hover\:bg-blue-700:hover,
+.hover\:bg-indigo-700:hover,
+.hover\:bg-indigo-600:hover {
+    background-color: var(--primary-dark) !important;
+}
+
+/* Text colors */
+.text-blue-500,
+.text-blue-600,
+.text-blue-700,
+.text-indigo-500,
+.text-indigo-600,
+.text-indigo-700 {
+    color: var(--primary) !important;
+}
+
+/* Borders */
+.border-blue-500,
+.border-blue-600,
+.border-indigo-500,
+.border-indigo-600 {
+    border-color: var(--primary) !important;
+}
+
+/* Input focus and rings */
+.focus\:border-indigo-500:focus,
+.focus\:border-blue-500:focus {
+    border-color: var(--primary) !important;
+}
+
+.focus\:ring-indigo-500:focus,
+.focus\:ring-blue-500:focus {
+    --tw-ring-color: var(--primary) !important;
+}
+
+/* Links */
+a {
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Form buttons */
+button[type="submit"],
+input[type="submit"] {
+    cursor: pointer;
+}
+
+/* Custom blue backgrounds used in page designs */
+[style*="#2457c5"],
+[style*="#2457C5"] {
+    background-color: var(--primary) !important;
+}
+
+/* Custom blue borders */
+[style*="border-left: 5px solid #2457c5"],
+[style*="border-top: 4px solid #2457c5"] {
+    border-color: var(--primary) !important;
+}
+
+/* Blue selection highlight */
+::selection {
+    background: var(--primary);
+    color: white;
+}
+
+/* Checkbox and radio accents */
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--primary);
+}
+
+/* Mobile-friendly layout */
+img,
+video {
+    max-width: 100%;
+}
