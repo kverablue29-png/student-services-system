@@ -1,23 +1,35 @@
-
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+namespace Database\Seeders;
 
-return new class extends Migration
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use RuntimeException;
+
+class DatabaseSeeder extends Seeder
 {
-    public function up(): void
+    public function run(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('role')->default('student');
-        });
-    }
+        $email = env('ADMIN_EMAIL');
+        $password = env('ADMIN_PASSWORD');
 
-    public function down(): void
-    {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
-        });
+        if (!$email || !$password) {
+            throw new RuntimeException(
+                'ADMIN_EMAIL and ADMIN_PASSWORD must be configured.'
+            );
+        }
+
+        $admin = User::firstOrCreate(
+            ['email' => $email],
+            [
+                'name' => 'System Admin',
+                'password' => Hash::make($password),
+            ]
+        );
+
+        $admin->forceFill([
+            'role' => 'admin',
+        ])->save();
     }
-};
+}

@@ -3,23 +3,43 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use RuntimeException;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $email = env('ADMIN_EMAIL');
+        $password = env('ADMIN_PASSWORD');
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        if (!$email || !$password) {
+            throw new RuntimeException(
+                'Admin environment variables are missing.'
+            );
+        }
+
+        $existing = User::where('email', $email)->first();
+
+        if ($existing) {
+            if ($existing->role !== 'admin') {
+                throw new RuntimeException(
+                    'Admin email is already used by a non-admin account.'
+                );
+            }
+
+            return;
+        }
+
+        $admin = new User();
+        $admin->name = 'System Admin';
+        $admin->email = $email;
+        $admin->password = Hash::make($password);
+        $admin->save();
+
+        $admin->forceFill([
+            'role' => 'admin',
+        ])->save();
     }
 }
