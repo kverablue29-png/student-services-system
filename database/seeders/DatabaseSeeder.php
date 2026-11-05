@@ -11,6 +11,12 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // Seed service categories
+        $this->call([
+            ServiceCategorySeeder::class,
+        ]);
+
+        // Admin account configuration
         $email = env('ADMIN_EMAIL');
         $password = env('ADMIN_PASSWORD');
 

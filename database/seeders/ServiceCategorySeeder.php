@@ -13,18 +13,22 @@ class ServiceCategorySeeder extends Seeder
             [
                 'name' => 'Enrollment',
                 'description' => 'Assistance with student enrollment.',
+                'is_active' => true,
             ],
             [
                 'name' => 'Document Request',
                 'description' => 'Request for school documents and certificates.',
+                'is_active' => true,
             ],
             [
                 'name' => 'Scholarship',
                 'description' => 'Scholarship information and assistance.',
+                'is_active' => true,
             ],
             [
                 'name' => 'Technical Support',
                 'description' => 'Help with student portal and technical concerns.',
+                'is_active' => true,
             ],
         ];
 
